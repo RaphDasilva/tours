@@ -17,7 +17,15 @@ const initialState = {
 const tourSlice = createSlice({
   name: 'tours',
   initialState,
-  reducers: {},
+  reducers: {
+    remove: (state, action) => {
+      const tourId = action.payload;
+      const newTours = state.tours.filter(
+        (tour) => tour.id !== tourId,
+      );
+      return { ...state, tours: newTours };
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getTours.pending, (state) => ({
